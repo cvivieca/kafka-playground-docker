@@ -1,4 +1,4 @@
-"Local Apache Kafka Environment with Docker Compose"
+# Local Apache Kafka Environment with Docker Compose
 
 This GitHub repository offers an effortlessly configurable Apache Kafka environment using Docker Compose, tailored for local practice and development. It features two distinct Docker Compose configurations, each comprising Apache Kafka, Control Center, ZooKeeper, and Schema Registry components.
 
