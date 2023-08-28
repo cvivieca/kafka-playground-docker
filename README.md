@@ -40,7 +40,7 @@ This GitHub repository offers an effortlessly configurable Apache Kafka environm
 
 4. Access Components
 
-   - Kafka: `<host_ip>:9093`
+   - Kafka: `<host_ip>:19092`
    - Control Center: `http://localhost:9021`
    - Schema Registry: `http://localhost:8081`
 
@@ -84,12 +84,12 @@ You can interact with the Kafka environment using the Kafka command-line tools. 
    Replace `HOST_IP` with your machine's IP address.
    
    ```shell
-   kafka-topics --bootstrap-server HOST_IP:9094 --topic first_topic --create --partitions 3 --replication-factor 1
+   kafka-topics --bootstrap-server HOST_IP:19092 --topic first_topic --create --partitions 3 --replication-factor 1
    ```
    
 2. **Consume Messages:**
    ```shell
-   kafka-console-consumer --bootstrap-server HOST_IP:9094 --topic first_topic --from-beginning
+   kafka-console-consumer --bootstrap-server HOST_IP:19092 --topic first_topic --from-beginning
    ```
 
 ### Using Kafka CLI from Docker Container
