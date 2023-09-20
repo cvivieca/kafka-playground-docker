@@ -59,12 +59,14 @@ The repository includes two Docker Compose configurations:
    - Kafka Broker (1 instance)
    - Control Center
    - Schema Registry
+   - KAfka REST
 
 2. **docker-compose-cluster.yml** - Multi-Broker Kafka Cluster Configuration
    - ZooKeeper
    - Kafka Brokers (3 instances)
    - Control Center
    - Schema Registry
+   - Kafka REST
 
 ### Environment Customization
 
