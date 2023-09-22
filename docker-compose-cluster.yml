@@ -130,7 +130,7 @@ services:
     environment:
       CONNECT_ZOOKEEPER_CONNECT: zookeeper:2181
       CONNECT_BOOTSTRAP_SERVERS: kafka1:9092,kafka2:9092,kafka3:9092
-      CONNECT_REST_ADVERTISED_HOST_NAME: connect
+      CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect
       CONNECT_REST_LISTENERS: http://0.0.0.0:8083
       CONNECT_REST_PORT: 8083
       CONNECT_GROUP_ID: kafka-connect
