@@ -47,7 +47,8 @@ services:
       CONTROL_CENTER_REPLICATION_FACTOR: 1
       CONTROL_CENTER_BOOTSTRAP_SERVERS: kafka1:9092
       CONTROL_CENTER_ZOOKEEPER_CONNECT: zookeeper:2181
-      CONTROL_CENTER_CONNECT_CLUSTER: "kafka1:9092"
+      CONTROL_CENTER_CONNECT_KAFKA-CONNECT_CLUSTER: http://kafka-connect:8083
+      CONTROL_CENTER_CONNECT_HEALTHCHECK_ENDPOINT: /connectors
       CONTROL_CENTER_DATA_TOPICS_AUTO_CREATE: "false"
       CONTROL_CENTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
     ports:
@@ -86,6 +87,40 @@ services:
       KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://kafka1:9092
       KAFKA_REST_LISTENERS: http://0.0.0.0:8082
       KAFKA_REST_SCHEMA_REGISTRY_URL: http://schema-registry:8081      
+
+  kafka-connect:
+    hostname: kafka-connect
+    image: confluentinc/cp-kafka-connect:$IMAGE_VERSION
+    depends_on:
+      - schema-registry
+      - kafka
+      - zookeeper    
+    ports:
+      - '8083:8083'
+    networks:
+      - kafka_network    
+    environment:
+      CONNECT_ZOOKEEPER_CONNECT: zookeeper:2181
+      CONNECT_BOOTSTRAP_SERVERS: kafka:9092
+      CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect
+      CONNECT_REST_LISTENERS: http://0.0.0.0:8083
+      CONNECT_REST_PORT: 8083
+      CONNECT_GROUP_ID: kafka-connect
+      CONNECT_CONFIG_STORAGE_TOPIC: _connect-configs
+      CONNECT_STATUS_STORAGE_TOPIC: _connect-status
+      CONNECT_OFFSET_STORAGE_TOPIC: _connect-offsets
+      CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE: 'true'
+      CONNECT_KEY_CONVERTER: 'io.confluent.connect.avro.AvroConverter'
+      CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE: 'true'
+      CONNECT_VALUE_CONVERTER: 'io.confluent.connect.avro.AvroConverter'
+      CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry:8081
+      CONNECT_INTERNAL_KEY_CONVERTER: 'org.apache.kafka.connect.json.JsonConverter'
+      CONNECT_INTERNAL_VALUE_CONVERTER: 'org.apache.kafka.connect.json.JsonConverter'
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_PLUGIN_PATH: ' /usr/share/java/'
 
 networks:
   kafka_network:
