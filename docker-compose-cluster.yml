@@ -148,7 +148,7 @@ services:
       CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
       CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
       CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
-      CONNECT_PLUGIN_PATH: ' /usr/share/java/'
+      CONNECT_PLUGIN_PATH: '/usr/share/java,/usr/share/confluent-hub-components,/usr/local/share/kafka/plugins,/usr/share/filestream-connectors'
 
   schema-registry:
     image: confluentinc/cp-schema-registry:$IMAGE_VERSION
